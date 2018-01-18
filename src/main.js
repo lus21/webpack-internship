@@ -1,7 +1,6 @@
 import './styles/index.less';
-import f from './app.js';
 import storage from './storage';
-import { increment } from './app';
+import increment from './app.js';
 
 function component() {
     const button = document.createElement('button'),
@@ -23,3 +22,17 @@ let comp = component();
 document.body.appendChild(comp);
 
 console.log('c')
+if (module.hot) {
+    module.hot.accept('./app.js', () => {
+        try {
+        increment();
+        console.log('updating app.js');
+        document.body.removeChild(comp);
+        comp = component();
+        console.log(comp, increment)
+        document.body.appendChild(comp);
+      } catch (err) {
+          console.error(err)
+      }
+    });
+}

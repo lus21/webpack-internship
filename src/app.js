@@ -1,9 +1,7 @@
 import storage from './storage';
-export default function() {
-	alert('HI');
-};
 
-export function increment() {
+export default function increment() {
+	console.log('increment')
 	const h1 = document.getElementById('count');
-	h1.innerHTML = --storage.clicks;
+	h1.innerHTML = ++storage.clicks;
 }
